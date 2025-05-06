@@ -1,10 +1,11 @@
 <?php
+session_start();
 require_once __DIR__ . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-$data = json_decode(file_get_contents('php://input'), true);
 
+$data = json_decode(file_get_contents('php://input'), true);
 $message = $data['message'] ?? '';
 
 if (empty($message)) {
@@ -18,14 +19,17 @@ if (empty($apiKey)) {
     exit;
 }
 
+if (!isset($_SESSION['chat_history'])) {
+    $_SESSION['chat_history'] = [];
+}
+
+$_SESSION['chat_history'][] = [
+    'role' => 'user',
+    'parts' => [['text' => $message]]
+];
+
 $payload = [
-    'contents' => [
-        [
-            'parts' => [
-                ['text' => $message]
-            ]
-        ]
-    ]
+    'contents' => $_SESSION['chat_history']
 ];
 
 $apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . $apiKey;
@@ -55,6 +59,11 @@ if (!isset($result['candidates'][0]['content']['parts'][0]['text'])) {
 }
 
 $reply = $result['candidates'][0]['content']['parts'][0]['text'];
+
+$_SESSION['chat_history'][] = [
+    'role' => 'model',
+    'parts' => [['text' => $reply]]
+];
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode(['reply' => $reply], JSON_UNESCAPED_UNICODE);
