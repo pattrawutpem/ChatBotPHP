@@ -13,6 +13,7 @@
     <div id="chatToggle" onclick="toggleChat()">💬 Chat AI</div>
 
     <div id="chatContainer" class="hidden">
+        <button class="rounded" onclick="toggleChat()"><strong>Chat AI</strong></button>
         <div id="chatbox" class="rounded"></div>
         <div id="input-area">
             <input type="text" class="form-control" id="userInput" placeholder="Type a message">
