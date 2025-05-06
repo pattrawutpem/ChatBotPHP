@@ -28,7 +28,7 @@ $payload = [
     ]
 ];
 
-$apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' . $apiKey;
+$apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . $apiKey;
 
 $ch = curl_init($apiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -55,6 +55,6 @@ if (!isset($result['candidates'][0]['content']['parts'][0]['text'])) {
 }
 
 $reply = $result['candidates'][0]['content']['parts'][0]['text'];
-d
+
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode(['reply' => $reply], JSON_UNESCAPED_UNICODE);

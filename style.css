@@ -19,7 +19,7 @@
     position: fixed;
     bottom: 70px;
     right: 20px;
-    width: 300px;
+    width: 340px;
     height: 400px;
     background: #fff;
     border-radius: 10px;
@@ -37,7 +37,7 @@
 }
 
 .message {
-    max-width: 80%;
+    max-width: 100%;
     margin: 5px;
     padding: 10px;
     border-radius: 15px;
