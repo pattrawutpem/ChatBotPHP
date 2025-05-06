@@ -20,12 +20,12 @@ function sendMessage() {
         if (data.reply) {
             chatbox.innerHTML += `<div class = "mb-3"><strong>Ai :</strong> <br> <div style="display: inline-block; background-color: #ACACACFF; padding: 10px; border-radius: 12px; color: white;">${data.reply}</div></div>`;
         } else {
-            chatbox.innerHTML += `<div class = "mb-3"><strong>Ai :</strong> <div style="display: inline-block; background-color: ##ACACACFF; padding: 10px; border-radius: 12px; color: white;">ไม่ได้รับคำตอบจาก API</div></div>`;
+            chatbox.innerHTML += `<div class = "mb-3"><strong>Ai :</strong> <div style="display: inline-block; background-color: ##ACACACFF; padding: 10px; border-radius: 12px; color: white;">No message API</div></div>`;
         }
         chatbox.scrollTop = chatbox.scrollHeight;
     })
     .catch(error => {
-        chatbox.innerHTML += `<div class = "mb-3"><strong>Ai :</strong> <div style="display: inline-block; background-color: ##ACACACFF; padding: 10px; border-radius: 12px; color: white;">เกิดข้อผิดพลาด</div></div>`;
+        chatbox.innerHTML += `<div class = "mb-3"><strong>Ai :</strong> <div style="display: inline-block; background-color: ##ACACACFF; padding: 10px; border-radius: 12px; color: white;">Error message</div></div>`;
         console.error(error);
     });
 }
